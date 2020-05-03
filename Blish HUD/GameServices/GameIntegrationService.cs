@@ -176,6 +176,14 @@ namespace Blish_HUD {
             CreateTrayIcon();
 
             TryAttachToGw2();
+
+            Gw2Mumble.Info.IsGameFocusedChanged += OnGameAcquiredFocus;
+        }
+
+        private void OnGameAcquiredFocus(object sender, ValueEventArgs<bool> e) {
+            if (e.Value) {
+                this.Gw2Process = Process.GetProcessById((int) Gw2Mumble.Info.ProcessId);
+            }
         }
 
         #region TrayIcon Menu Items
